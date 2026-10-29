@@ -7,9 +7,16 @@ int solve() {
   cin >> n;
   vector<char> a(n);
   for (char& c: a) cin >> c;
-  unordered_map<char> occ1, occ2;
-  int ret = 0, max1 = 0, max2 = 0;
-  
+  unordered_map<char,int> occ1, occ2; 
+  for (char& c: a) occ2[c]++;
+  int ret = occ2.size();
+  for (int i = 0; i < n; i++) {
+    occ1[a[i]]++;
+    occ2[a[i]]--;
+    if (occ2[a[i]] == 0) occ2.erase(a[i]);
+    ret = max(ret,(int)(occ1.size()+occ2.size()));
+  }
+  return ret;
 }
 
 int main() {
