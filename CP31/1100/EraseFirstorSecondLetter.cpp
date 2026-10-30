@@ -4,12 +4,15 @@ using ll = long long;
 
 int solve() {
   int n;
-  cin >> n;
-  vector<char> a(n);
-  for (char& c: a) cin >> c;
-  unordered_map<char> occ1, occ2;
-  int ret = 0, max1 = 0, max2 = 0;
-  
+  string s;
+  cin >> n >> s;
+  int ret = 0;
+  unordered_map<char,bool> found;
+  for (int i = 0; i < n; i++) {
+    if (!found[s[i]]) ret += n-i;
+    found[s[i]] = true;
+  }
+  return ret;
 }
 
 int main() {
@@ -18,4 +21,6 @@ int main() {
   int t;
   cin >> t;
   while (t--) cout << solve() << "\n";
+
+  return 0;
 }
